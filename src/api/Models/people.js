@@ -23,7 +23,7 @@ class People {
         if (this.isValid(_people) && this.people.find(e => e.id === people.id) === undefined && this.people.length < 256) {
             this.people.push(_people);
         }
-        return _employee;
+        return _people;
     }
 
     read(_id) {

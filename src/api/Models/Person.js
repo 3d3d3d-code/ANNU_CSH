@@ -8,11 +8,7 @@ class Person {
         this.phone = phone || "";// String (à verifier)
         this.email = email || "";//String (à verifier)
         this.groupid = groupid || "defaut";// String
-
-
     }
-
-
 }
 
 module.exports = Person;
