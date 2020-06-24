@@ -31,6 +31,35 @@ class StringCheck {
   }
 
   /**
+   * Retire un séparateur
+   * @param _person 
+   * @param target
+   * @param replacement
+   */
+  clearPhone(_person) {
+    let cleanPhone = _person.phone;
+    let i;
+    for (i = 0; i < _person.phone.length; i++) {
+      if (_person.phone.includes(" ")) {
+        cleanPhone = cleanPhone.replace(" ", "");
+      }
+      if (_person.phone.includes("-")) {
+        cleanPhone = cleanPhone.replace("-", "");
+      }
+      if (_person.phone.includes(".")) {
+        cleanPhone = cleanPhone.replace(".", "");
+      }
+      if (_person.phone.includes("_")) {
+        cleanPhone = cleanPhone.replace("_", "");
+      }
+      if (_person.phone.includes("/")) {
+        cleanPhone = cleanPhone.replace("/", "");
+      }
+    }
+    return cleanPhone;
+  }
+
+  /**
    * Vérifie le format d'un numéro de téléphone (format national et international)
    * @param _person
    * @returns bool true si format ok
@@ -38,13 +67,12 @@ class StringCheck {
   phoneNumber(_person) {
     //sans espacement aucun
     //national : premier chiffre : 0, second 1 à 9
-    //international fr : préfixe +33 
+    //international fr : préfixe +33
     let phoneNumNat = /^([0]{1})([1-9]{1})([0-9]{8})$/;
     let phoneNumInter = /^\+?([3]{2})([1-9]{1})([0-9]{8})$/;
-    if (
-      !_person.phone.match(phoneNumNat) 
-      &&      !_person.phone.match(phoneNumInter)
-    ) {
+    let cleanPhone = this.clearPhone(_person);
+
+    if (!cleanPhone.match(phoneNumNat) && !cleanPhone.match(phoneNumInter)) {
       return false;
     }
     return true;
@@ -57,11 +85,12 @@ class StringCheck {
   convertPhoneNumber(_person) {
     let phoneNumNat = /^([0]{1})([1-9]{1})([0-9]{8})$/;
     let phoneNumInter = /^\+?([3]{2})([1-9]{1})([0-9]{8})$/;
-    if (_person.phone.match(phoneNumNat)) {
-      return (_person.phone = "+33" + _person.phone.substring(1, 10));
+    let cleanPhone = this.clearPhone(_person);
+    if (cleanPhone.match(phoneNumNat)) {
+      return (cleanPhone = "+33" + cleanPhone.substring(1, 10));
     }
-    if (_person.phone.match(phoneNumInter)) {
-      return (_person.phone = "0" + _person.phone.substring(3, 12));
+    if (cleanPhone.match(phoneNumInter)) {
+      return (cleanPhone = "0" + cleanPhone.substring(3, 12));
     }
   }
 
@@ -72,7 +101,6 @@ class StringCheck {
    */
   isValide(_person) {
     if (
-
       !this.email(_person) ||
       !this.name(_person.lastname) ||
       !this.name(_person.firstname) ||
