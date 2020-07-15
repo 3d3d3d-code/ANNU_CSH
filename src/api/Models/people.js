@@ -47,11 +47,18 @@ class People {
             // return persClone;
 
 
-            //alternative temporaire à objet.assign : 
+            //alternative 1 à objet.assign : 
+            /*
             let persClone = new Person(
                 pers.getId(), pers.getLastname(), pers.getFirstname(), pers.getPhone(), pers.getEmail(), pers.getGroupid()
-            );
-            return persClone;
+                );
+                return persClone;
+                */
+               
+               //alternative 2 à objet.assign : 
+
+                return pers.clone();
+
         }
         return undefined;
     }

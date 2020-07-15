@@ -77,6 +77,11 @@ class Person {
             + "\nEmail : " + this.#email + "\nGroupid : " + this.#groupid;
     }
 
+    //alternative obj assign
+    clone(){
+        return new Person (this.#id, this.#lastname, this.#firstname, this.#phone, this.#email, this.#groupid);
+    }
+
 }
 
 module.exports = Person;
