@@ -43,7 +43,14 @@ class People {
 
         if (pers !== undefined) {
 
-            let persClone = Object.assign(new Person(), pers);
+            // let persClone = Object.assign(new Person(), pers);
+            // return persClone;
+
+
+            //alternative temporaire à objet.assign : 
+            let persClone = new Person(
+                pers.getId(), pers.getLastname(), pers.getFirstname(), pers.getPhone(), pers.getEmail(), pers.getGroupid()
+            );
             return persClone;
         }
         return undefined;

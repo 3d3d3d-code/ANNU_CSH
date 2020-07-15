@@ -30,16 +30,13 @@ console.log(annuaire.isValid(pers2));
 console.log(annuaire);
 annuaire.display();
 
-//test update
-let clone = annuaire.read(1); //bug obj assign attrib priv
+//test read(id) & update
+let clone = annuaire.read(2); //bug obj assign attrib priv
 console.log("________________clone :")
 console.log(clone);
 console.log(clone.toString());
-clone.setId(1);
-clone.setLastname("truc");
-clone.setFirstname("bidule");
 clone.setPhone("01 02-03/04_05."); //test clearPhone /display -> ok
-clone.setEmail("truc.bidule@mail.com");
+
 console.log(clone.toString());
 console.log("________________")
 
