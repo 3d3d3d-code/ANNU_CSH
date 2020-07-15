@@ -1,5 +1,5 @@
 const Person = require('./Person.js');
-const StringCheck = require ("./StringCheck");
+const StringCheck = require("./StringCheck");
 
 class People {
     constructor() {
@@ -9,13 +9,16 @@ class People {
 
     isValid(_person) {
 
-        let test = new StringCheck();
 
         if (!(_person instanceof Person)) {
             return false;
         }
 
-        if(!(test.email(_person))){
+        //StringCheck
+
+        let test = new StringCheck();
+
+        if (!(test.isValid(_person))) {
             return false;
         }
 
@@ -36,43 +39,54 @@ class People {
 
     read(_id) {
 
-        let pers = this.people.find(pers => pers.id === parseInt(_id));
+        let pers = this.people.find(pers => pers.getId() === parseInt(_id));
 
         if (pers !== undefined) {
 
-            let persClone = Object.assign(new Person(), pers)
+            let persClone = Object.assign(new Person(), pers);
             return persClone;
         }
         return undefined;
     }
 
-    // demander à Mikael
-    // update(_person) {
-    //     if (!this.isValid(_person)) {
-    //         return _person;
-    //     }
+
+    update(_person) {
+        
+        if (!this.isValid(_person)) {
+            return _person;
+        }
 
 
-    //     if (_person.id < 1 && _person.id !== NaN) {
-    //         return _person;
-    //     }
+        if (_person.getId() < 1 && _person.getId() !== NaN) {
+            return _person;
+        }
 
-    //     let exists = this.people.find(e => e.id === _person.id);
+        let exists = this.people.find(e => e.getId() === _person.getId());
 
-    //     if (exists !== undefined) {
-    //         exists.copy(_person);
-    //         return exists;
-    //     }
+        if (exists !== undefined) {
+            exists.copy(_person.getId(), _person.getLastname(), _person.getFirstname(), _person.getPhone(), _person.getEmail(), _person.getGroupid());
+            return exists;
+        }
 
-    //     return exists;
-    // }
+        return exists;
+    }
 
 
     delete(_id) {
-        let toDelete = this.people.findIndex(emp => emp.id === parseInt(_id));
+        let toDelete = this.people.findIndex(emp => emp.getId() === parseInt(_id));
         if (toDelete > -1)
             this.people.splice(toDelete, 1);
     }
+
+    //Affichage textuel des éléments de la collection
+    display() {
+        for (let i = 0; i < this.people.length; i++) {
+            console.log(
+                this.people[i].toString()
+            );
+
+        }
+    }
 }
 
-module.exports = People ;
+module.exports = People;

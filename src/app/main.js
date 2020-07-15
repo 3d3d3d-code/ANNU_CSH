@@ -3,7 +3,7 @@ const People = require('../api/Models/people.js');
 const StringCheck = require("../api/Models/StringCheck.js");
 
 var annuaire = new People();
-var pers = new Person(1,"Chaporet","Etemieux","0666666666","caae@aol.com","annie");
+var pers = new Person(1, "Chaporet", "Etemieux", "0666666666", "caae@aol.com", "annie");
 
 
 let pers2 = new Person(
@@ -15,30 +15,46 @@ let pers2 = new Person(
   "graou"
 );
 
-//let check = new StringCheck();
-
-
-console.log(pers.toString());
-
-annuaire.create(pers2);
-console.log(annuaire.isValid(pers));
-annuaire.create(pers);
-
-console.log(annuaire);
-console.log(annuaire.people[1].toString());
-
-console.log(annuaire.isValid(pers2));
 
 
 
-// console.log(check.email(pers2));
-// console.log(check.name(pers2.lastname));
-// console.log(check.name(pers2.firstname));
+//tet create()
+// annuaire.create(pers);
+// annuaire.create(pers2);
 
-// console.log(check.convertPhoneNumber(pers2));
-// console.log(check.phoneNumber(pers2));
+//test People.isValid()
+// console.log(annuaire.isValid(pers));
+// console.log(annuaire.isValid(pers2));
 
-// console.log(check.isValide(pers));
+//affichage annuaire
+// console.log(annuaire);
+// annuaire.display();
+
+//test update
+// let clone = annuaire.read(1);
+// console.log("________________clone :")
+// console.log(clone);
+// console.log(clone.toString());
+// clone.setPhone("0102030405");
+// console.log(clone.toString());
+// console.log("________________")
+
+// annuaire.update(clone);
+
+
+
+
+// console.log("pers", pers.toString());
+// console.log(annuaire.people[0].toString());
+
+
+// annuaire.display();
+
+
+let persClone = Object.assign(new Person(), pers2);
+console.log("persClone", persClone.toString());
+
+
 
 
 
