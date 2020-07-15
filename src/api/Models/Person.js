@@ -47,7 +47,7 @@ class Person {
     }
 
     setId(_id) {
-        this.#id = parseInt(_id) || NaN;
+        this.#id = parseInt(_id);
     }
 
     setLastname(_lastname) {
