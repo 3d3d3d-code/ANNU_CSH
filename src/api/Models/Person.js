@@ -8,6 +8,7 @@ class Person {
 
     constructor(person) {
 
+
         this.#id = 0;
         this.#lastname = "";
         this.#firstname = "";
@@ -28,8 +29,8 @@ class Person {
         this.#phone = person.#phone || "";// String (à verifier)
         this.#email = person.#email || "";//String (à verifier)
         this.#groupid = person.#groupid || "defaut";// String
-
     }
+}
 
 }
 module.exports = Person;
