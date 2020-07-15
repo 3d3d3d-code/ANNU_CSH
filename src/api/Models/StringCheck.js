@@ -1,8 +1,11 @@
+const Person = require ("./Person");
+
 /** vérifie et (re)formatte des chaines de caractères.
  * @class StringCheck
  */
 
 class StringCheck {
+  
   constructor() {}
   /**
    * Vérifie le format d'un email
@@ -11,7 +14,7 @@ class StringCheck {
    */
   email(_person) {
     let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!_person.email.match(mailFormat)) {
+    if (!_person.getEmail().match(mailFormat)) {
       return false;
     }
     return true;

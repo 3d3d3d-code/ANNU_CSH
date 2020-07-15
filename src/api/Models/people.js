@@ -1,4 +1,5 @@
 const Person = require('./Person.js');
+const StringCheck = require ("./StringCheck");
 
 class People {
     constructor() {
@@ -6,11 +7,18 @@ class People {
     }
 
 
-    isValid(_people) {
+    isValid(_person) {
 
-        if (!(_people instanceof Person)) {
+        let test = new StringCheck();
+
+        if (!(_person instanceof Person)) {
             return false;
         }
+
+        if(!(test.email(_person))){
+            return false;
+        }
+
         return true;
     }
 
@@ -18,12 +26,12 @@ class People {
         return this.people.filter(_filter);
     }
 
-    create(_people) {
+    create(_person) {
 
-        if (this.isValid(_people) && this.people.find(e => e.id === people.id) === undefined && this.people.length < 256) {
-            this.people.push(_people);
+        if (this.isValid(_person) && this.people.find(e => e.getId() === _person.getId()) === undefined && this.people.length < 256) {
+            this.people.push(_person);
         }
-        return _people;
+        return _person;
     }
 
     read(_id) {
@@ -38,25 +46,26 @@ class People {
         return undefined;
     }
 
-    update(_people) {
-        if (!this.isValid(_people)) {
-            return _people;
-        }
+    // demander à Mikael
+    // update(_person) {
+    //     if (!this.isValid(_person)) {
+    //         return _person;
+    //     }
 
 
-        if (_people.id < 1 && _people.id !== NaN) {
-            return _people;
-        }
+    //     if (_person.id < 1 && _person.id !== NaN) {
+    //         return _person;
+    //     }
 
-        let exists = this.people.find(e => e.id === _people.id);
+    //     let exists = this.people.find(e => e.id === _person.id);
 
-        if (exists !== undefined) {
-            exists.copy(_people);
-            return exists;
-        }
+    //     if (exists !== undefined) {
+    //         exists.copy(_person);
+    //         return exists;
+    //     }
 
-        return exists;
-    }
+    //     return exists;
+    // }
 
 
     delete(_id) {
