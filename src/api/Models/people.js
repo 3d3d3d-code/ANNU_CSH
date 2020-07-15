@@ -51,7 +51,7 @@ class People {
 
 
     update(_person) {
-        
+
         if (!this.isValid(_person)) {
             return _person;
         }
@@ -80,7 +80,10 @@ class People {
 
     //Affichage textuel des éléments de la collection
     display() {
+        let stringcheck = new StringCheck();
         for (let i = 0; i < this.people.length; i++) {
+            this.people[i].setPhone(stringcheck.clearPhone(this.people[i])); //retire séparateur
+
             console.log(
                 this.people[i].toString()
             );
