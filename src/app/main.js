@@ -3,7 +3,7 @@ const People = require('../api/Models/people.js');
 const StringCheck = require("../api/Models/StringCheck.js");
 
 var annuaire = new People();
-var pers = new Person(1, "Chaporet", "Etemieux", "0666666666", "caae@aol.com", "annie");
+var pers = new Person(1, "Chaporet", "Etemieux", "06 66/66.66-66", "caae@aol.com", "annie");
 
 
 let pers2 = new Person(
@@ -15,44 +15,46 @@ let pers2 = new Person(
   "graou"
 );
 
-
+let chk = new StringCheck();
 
 
 //tet create()
-// annuaire.create(pers);
-// annuaire.create(pers2);
+annuaire.create(pers);
+annuaire.create(pers2);
 
 //test People.isValid()
-// console.log(annuaire.isValid(pers));
-// console.log(annuaire.isValid(pers2));
+console.log(annuaire.isValid(pers));
+console.log(annuaire.isValid(pers2));
 
 //affichage annuaire
-// console.log(annuaire);
-// annuaire.display();
+console.log(annuaire);
+annuaire.display();
 
 //test update
-// let clone = annuaire.read(1);
-// console.log("________________clone :")
-// console.log(clone);
-// console.log(clone.toString());
-// clone.setPhone("0102030405");
-// console.log(clone.toString());
-// console.log("________________")
+let clone = annuaire.read(1); //bug obj assign attrib priv
+console.log("________________clone :")
+console.log(clone);
+console.log(clone.toString());
+clone.setId(1);
+clone.setLastname("truc");
+clone.setFirstname("bidule");
+clone.setPhone("01 02-03/04_05."); //test clearPhone /display -> ok
+clone.setEmail("truc.bidule@mail.com");
+console.log(clone.toString());
+console.log("________________")
 
-// annuaire.update(clone);
+annuaire.update(clone); //update ok
+
+annuaire.display();
+
+console.log();
+clone.setPhone(chk.clearPhone(clone));
+console.log("clone", clone.getPhone());
 
 
-
-
-// console.log("pers", pers.toString());
-// console.log(annuaire.people[0].toString());
-
-
-// annuaire.display();
-
-
-let persClone = Object.assign(new Person(), pers2);
-console.log("persClone", persClone.toString());
+//test obj assign
+// let persClone = Object.assign(new Person(), pers2);
+// console.log("persClone", persClone.toString());
 
 
 
