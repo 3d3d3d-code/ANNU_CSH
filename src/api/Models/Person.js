@@ -6,15 +6,20 @@ class Person {
     #email;
     #groupid;
 
+
     constructor(_id, _lastname, _firstname, _phone, _email, _groupid) {
 
-        this.#id = _id;
-        this.#lastname = _lastname;
-        this.#firstname = _firstname;
-        this.#phone = _phone;
-        this.#email = _email;
-        this.#groupid = _groupid;
+        this.copy(_id, _lastname, _firstname, _phone, _email, _groupid);
 
+    }
+
+    copy(_id, _lastname, _firstname, _phone, _email, _groupid) {
+        this.#id = parseInt(_id) || NaN;
+        this.#lastname = _lastname || "";
+        this.#firstname = _firstname || "";
+        this.#phone = _phone || "";
+        this.#email = _email || "";
+        this.#groupid = _groupid || "unknow";
     }
 
     getId() {
@@ -42,7 +47,7 @@ class Person {
     }
 
     setId(_id) {
-        this.#id = parseInt(_id) || NaN;
+        this.#id = parseInt(_id);
     }
 
     setLastname(_lastname) {
@@ -65,10 +70,16 @@ class Person {
         this.#groupid = _groupid;
     }
 
+    //affichage textuel des attributs
     toString() {
         return "Id : " + this.#id + "\nLastname : " + this.#lastname
             + "\nFirstname : " + this.#firstname + "\nPhone : " + this.#phone
             + "\nEmail : " + this.#email + "\nGroupid : " + this.#groupid;
+    }
+
+    //alternative obj assign
+    clone(){
+        return new Person (this.#id, this.#lastname, this.#firstname, this.#phone, this.#email, this.#groupid);
     }
 
 }

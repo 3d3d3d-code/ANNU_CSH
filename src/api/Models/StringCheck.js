@@ -1,12 +1,12 @@
-const Person = require ("./Person");
+const Person = require("./Person");
 
 /** vérifie et (re)formatte des chaines de caractères.
  * @class StringCheck
  */
 
 class StringCheck {
-  
-  constructor() {}
+
+  constructor() { }
   /**
    * Vérifie le format d'un email
    * @param _person
@@ -35,27 +35,26 @@ class StringCheck {
 
   /**
    * Retire un séparateur
-   * @param _person 
-   * @param target
-   * @param replacement
+   * @param _person
    */
   clearPhone(_person) {
-    let cleanPhone = _person.phone;
+    let originPhone = _person.getPhone();
+    let cleanPhone = originPhone;
     let i;
-    for (i = 0; i < _person.phone.length; i++) {
-      if (_person.phone.includes(" ")) {
+    for (i = 0; i < originPhone.length; i++) {
+      if (cleanPhone.includes(" ")) {
         cleanPhone = cleanPhone.replace(" ", "");
       }
-      if (_person.phone.includes("-")) {
+      if (cleanPhone.includes("-")) {
         cleanPhone = cleanPhone.replace("-", "");
       }
-      if (_person.phone.includes(".")) {
+      if (cleanPhone.includes(".")) {
         cleanPhone = cleanPhone.replace(".", "");
       }
-      if (_person.phone.includes("_")) {
+      if (cleanPhone.includes("_")) {
         cleanPhone = cleanPhone.replace("_", "");
       }
-      if (_person.phone.includes("/")) {
+      if (cleanPhone.includes("/")) {
         cleanPhone = cleanPhone.replace("/", "");
       }
     }
@@ -88,7 +87,7 @@ class StringCheck {
   convertPhoneNumber(_person) {
     let phoneNumNat = /^([0]{1})([1-9]{1})([0-9]{8})$/;
     let phoneNumInter = /^\+?([3]{2})([1-9]{1})([0-9]{8})$/;
-    let cleanPhone = this.clearPhone(_person);
+    let cleanPhone = this.clearPhone(_person.getPhone());
     if (cleanPhone.match(phoneNumNat)) {
       return (cleanPhone = "+33" + cleanPhone.substring(1, 10));
     }
@@ -102,11 +101,11 @@ class StringCheck {
    * @param _person
    * @returns bool true si tout ok
    */
-  isValide(_person) {
+  isValid(_person) {
     if (
       !this.email(_person) ||
-      !this.name(_person.lastname) ||
-      !this.name(_person.firstname) ||
+      !this.name(_person.getLastname()) ||
+      !this.name(_person.getFirstname()) ||
       !this.phoneNumber(_person)
     ) {
       return false;
