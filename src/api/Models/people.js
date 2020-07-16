@@ -1,4 +1,5 @@
 const Person = require('./Person.js');
+const StringCheck = require("./StringCheck");
 
 class People {
     constructor() {
@@ -6,11 +7,21 @@ class People {
     }
 
 
-    isValid(_people) {
+    isValid(_person) {
 
-        if (!(_people instanceof Person)) {
+
+        if (!(_person instanceof Person)) {
             return false;
         }
+
+        //StringCheck
+
+        let test = new StringCheck();
+
+        if (!(test.isValid(_person))) {
+            return false;
+        }
+
         return true;
     }
 
@@ -18,40 +29,56 @@ class People {
         return this.people.filter(_filter);
     }
 
-    create(_people) {
+    create(_person) {
 
-        if (this.isValid(_people) && this.people.find(e => e.id === people.id) === undefined && this.people.length < 256) {
-            this.people.push(_people);
+        if (this.isValid(_person) && this.people.find(e => e.getId() === _person.getId()) === undefined && this.people.length < 256) {
+            this.people.push(_person);
         }
-        return _people;
+        return _person;
     }
 
     read(_id) {
 
-        let pers = this.people.find(pers => pers.id === parseInt(_id));
+        let pers = this.people.find(pers => pers.getId() === parseInt(_id));
 
         if (pers !== undefined) {
 
-            let persClone = Object.assign(new Person(), pers)
-            return persClone;
+            // let persClone = Object.assign(new Person(), pers);
+            // return persClone;
+
+
+            //alternative 1 à objet.assign : 
+            /*
+            let persClone = new Person(
+                pers.getId(), pers.getLastname(), pers.getFirstname(), pers.getPhone(), pers.getEmail(), pers.getGroupid()
+                );
+                return persClone;
+                */
+               
+               //alternative 2 à objet.assign : 
+
+                return pers.clone();
+
         }
         return undefined;
     }
 
-    update(_people) {
-        if (!this.isValid(_people)) {
-            return _people;
+
+    update(_person) {
+
+        if (!this.isValid(_person)) {
+            return _person;
         }
 
 
-        if (_people.id < 1 && _people.id !== NaN) {
-            return _people;
+        if (_person.getId() < 1 && _person.getId() !== NaN) {
+            return _person;
         }
 
-        let exists = this.people.find(e => e.id === _people.id);
+        let exists = this.people.find(e => e.getId() === _person.getId());
 
         if (exists !== undefined) {
-            exists.copy(_people);
+            exists.copy(_person.getId(), _person.getLastname(), _person.getFirstname(), _person.getPhone(), _person.getEmail(), _person.getGroupid());
             return exists;
         }
 
@@ -60,10 +87,23 @@ class People {
 
 
     delete(_id) {
-        let toDelete = this.people.findIndex(emp => emp.id === parseInt(_id));
+        let toDelete = this.people.findIndex(emp => emp.getId() === parseInt(_id));
         if (toDelete > -1)
             this.people.splice(toDelete, 1);
     }
+
+    //Affichage textuel des éléments de la collection
+    display() {
+        let stringcheck = new StringCheck();
+        for (let i = 0; i < this.people.length; i++) {
+            this.people[i].setPhone(stringcheck.clearPhone(this.people[i])); //retire séparateur
+
+            console.log(
+                this.people[i].toString()
+            );
+
+        }
+    }
 }
 
-module.exports = People ;
+module.exports = People;
