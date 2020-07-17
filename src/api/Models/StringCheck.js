@@ -1,16 +1,15 @@
 const Person = require("./Person");
 
-/** vérifie et (re)formatte des chaines de caractères.
+/** check and (re)formate strings.
  * @class StringCheck
  */
-
 class StringCheck {
 
   constructor() { }
   /**
-   * Vérifie le format d'un email
+   * check mail format
    * @param _person
-   * @returns bool true si format ok
+   * @returns bool true : format ok | false : format not ok
    */
   email(_person) {
     let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -21,12 +20,12 @@ class StringCheck {
   }
 
   /**
-   * Vérifie le format d'un nom ou prénom
+   * check name format
    * @param _name firstname/lastname
-   * @returns bool true si format ok
+   * @returns bool true : format ok | false : format not ok
    */
   name(_name) {
-    let nameFormat = /^[a-z ,.'-]+$/i; //supporte noms complexes
+    let nameFormat = /^[a-z ,.'-]+$/i; //of for complex names
     if (!_name.match(nameFormat)) {
       return false;
     }
@@ -34,8 +33,9 @@ class StringCheck {
   }
 
   /**
-   * Retire un séparateur
+   * remove separators
    * @param _person
+   * @returns phone number of _person without separators
    */
   clearPhone(_person) {
     let originPhone = _person.getPhone();
@@ -62,9 +62,9 @@ class StringCheck {
   }
 
   /**
-   * Vérifie le format d'un numéro de téléphone (format national et international)
+   * check phone format (national or international format)
    * @param _person
-   * @returns bool true si format ok
+   * @returns bool true : format ok | false : format not ok
    */
   phoneNumber(_person) {
     //sans espacement aucun
@@ -81,8 +81,9 @@ class StringCheck {
   }
 
   /**
-   * Conversion d'un numéro de téléphone national (0389010203) vers le format international (+33389010203) et inversement
+   * Convert phonenumber national to internation and inversely
    * @param _person
+   * @returns converted phonenumber
    */
   convertPhoneNumber(_person) {
     let phoneNumNat = /^([0]{1})([1-9]{1})([0-9]{8})$/;
@@ -97,9 +98,9 @@ class StringCheck {
   }
 
   /**
-   * Valide un objet "Person" (valide l'ensemble des opérations précédentes)
+   * Valid an object Person
    * @param _person
-   * @returns bool true si tout ok
+   * @returns bool true : all ok | false : format not all ok
    */
   isValid(_person) {
     if (
